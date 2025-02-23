@@ -2,29 +2,23 @@ import java.util.ArrayList;
 public class Train implements TrainRequirements
 {
     private ArrayList<Car> carList; 
-    private FuelType f; 
-    private double fuelCapacity; 
-    private int nCars; 
-    private int passengerCapacity; 
     private Engine engine; 
 
     /**
      * This is the constructor for the Train Class.
-     * @param f- the fuel type attribute
-     * @param fuelCapacity- how much fuel the train can hold
-     * @param nCars- how many cars the train has
-     * @param passengerCapacity how manu people the train can fit. 
+     * @param f the fuel type attribute for engine
+     * @param fuelCapacity how much fuel the train can hold for engine
+     * @param nCars how many cars the train has 
+     * @param passengerCapacity how many people the train can fit. 
      */
     public Train(FuelType f, double fuelCapacity, int nCars, int passengerCapacity)
     {
-        this.f= f; 
-        this.fuelCapacity= fuelCapacity; 
-        this.nCars= nCars; 
-        this.passengerCapacity= passengerCapacity; 
-        this.engine= new Engine(f, 100,100); 
-        for (int counter= 1; counter<=this.nCars; counter++)
+       
+        this.engine= new Engine(f, fuelCapacity,fuelCapacity); 
+        this.carList= new ArrayList<>(nCars); 
+        for (int counter= 0; counter<nCars; counter++)
         {
-            Car testingCar= new Car(passengerCapacity); 
+            carList.add(new Car(passengerCapacity)); 
         }
 
     }
@@ -45,8 +39,8 @@ public class Train implements TrainRequirements
     */
     public Car getCar(int i)
     {
-        Car notacar= new Car(0); 
-        return notacar; 
+        return carList.get(i); 
+        
     }
     /**
      * This function returns the MaxCapacity for the total train. 
@@ -54,7 +48,11 @@ public class Train implements TrainRequirements
      */
     public int getMaxCapacity()
     {
-        int MaxCapacity= carList.size()*passengerCapacity; 
+        int MaxCapacity=0; 
+        for (int i=0; i<carList.size(); i++)
+        {
+            MaxCapacity+= carList.get(i).getCapacity(); 
+        }
         return MaxCapacity; 
     }
     /**
@@ -64,7 +62,7 @@ public class Train implements TrainRequirements
     public int seatsRemaining()
     {
         int total_seats_remaining= 0;
-        for (int counter= 1; counter<carList.size(); counter++)
+        for (int counter= 0; counter<carList.size(); counter++)
         {
             total_seats_remaining+=carList.get(counter).seatsRemaining(); 
         }
@@ -74,12 +72,52 @@ public class Train implements TrainRequirements
     /**
      * This function prints the manifest of all the passengers on the entire train. 
      */
-    public void printManifest()
-    {
-        for (int counter= 1; counter<carList.size(); counter++)
+    public void printManifest(){
+       
+        System.out.println("Passenger Manifest: ");
+        Boolean empty_train= true; 
+        for (int counter=0; counter<this.carList.size(); counter++)
         {
-            carList.get(counter).printManifest();
+            if(this.getCar(counter).seatsRemaining()!=this.getCar(counter).getCapacity())
+            {
+                empty_train=false;  
+            }
+
         }
+        if (empty_train== true)
+        {
+            System.out.println("This train is empty!");
+        }
+        else
+        {
+            for (int counter= 0; counter<carList.size(); counter++)
+        {
+           carList.get(counter).printManifest();
+        }
+        }
+    }
+
+    public static void main(String[] args) 
+    {
+        Train testing_train= new Train( FuelType.ELECTRIC, 100.0, 3, 5); 
+        System.out.println(testing_train.carList);
+        testing_train.printManifest();
+        Passenger Kylie= new Passenger("Kylie"); 
+        Passenger Katie= new Passenger("Katie"); 
+        Passenger Alice= new Passenger("ALice"); 
+        Passenger Syd= new Passenger("Syd"); 
+        Passenger Sarah= new Passenger("Sarah"); 
+        System.out.println(testing_train.getEngine());
+        System.out.println(testing_train.getMaxCapacity()); 
+
+        testing_train.getCar(0).addPassenger(Kylie); 
+        testing_train.getCar(0).addPassenger(Katie); 
+        testing_train.getCar(1).addPassenger(Alice); 
+        testing_train.getCar(1).addPassenger(Syd); 
+        testing_train.getCar(2).addPassenger(Sarah); 
+
+        System.out.println(testing_train.seatsRemaining()); 
+        testing_train.printManifest(); 
     }
 
 

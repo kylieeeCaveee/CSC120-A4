@@ -57,8 +57,11 @@ public class Passenger implements PassengerRequirements{
         Car testingCar= new Car(1); 
         Passenger Kylie= new Passenger("Kylie"); 
         Kylie.boardCar(testingCar);
+        Passenger Katie= new Passenger("Katie"); 
+        Katie.boardCar(testingCar);
         testingCar.printManifest();
         Kylie.getOffCar(testingCar); 
         testingCar.printManifest();
+        Katie.getOffCar(testingCar); 
     }
 }

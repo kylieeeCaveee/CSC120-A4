@@ -42,7 +42,7 @@ public class Engine implements EngineRequirements{
      */
     public double getMaxFuel()
     {
-        return this.MaxFuelLevel; 
+        return CurrentFuelLevel= this.MaxFuelLevel; 
     }
 
     /**
@@ -67,9 +67,16 @@ public class Engine implements EngineRequirements{
      */
     public Boolean go()
     {
-        this.CurrentFuelLevel= this.CurrentFuelLevel-5; 
-        System.out.println("Current Fuel Level: "+ this.CurrentFuelLevel); 
-        return CurrentFuelLevel>0; 
+        if (CurrentFuelLevel>0)
+        {
+            this.CurrentFuelLevel= this.CurrentFuelLevel-5; 
+        System.out.println("Current Fuel Level: "+ this.CurrentFuelLevel);
+        } 
+        else {
+            System.out.println("Fuel level is too low to run.");
+         } 
+        return CurrentFuelLevel>0;
+
     }
 
     public static void main(String[] args)
@@ -82,11 +89,12 @@ public class Engine implements EngineRequirements{
         Engine myOtherEngine= new Engine(FuelType.STEAM, 50.0, 100.0); 
         System.out.println(myOtherEngine); 
         myOtherEngine.refuel(); 
-        System.out.println(myOtherEngine);
-        myOtherEngine.CurrentFuelLevel= 10; 
-        myOtherEngine.go(); 
-        System.out.println(myOtherEngine);
-        System.out.println(myOtherEngine.go());
-        System.out.println(myOtherEngine);
+        Engine trialEngine = new Engine(FuelType.ELECTRIC, 100.0, 100.0);
+        while (trialEngine.go()) 
+        {
+            System.out.println("Choo choo!");
+        }
+        System.out.println("Out of fuel.");
+        System.out.println(trialEngine.go());
     }
 }

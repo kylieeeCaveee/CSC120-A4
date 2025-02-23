@@ -76,18 +76,20 @@ public Boolean removePassenger(Passenger P)
  */
 public void printManifest()
 {
-    if(this.passengerlist.size()>0)
-    {
+    if(this.passengerlist.size()>0){
         for( int current_idx= 0; current_idx<this.passengerlist.size(); current_idx++)
         {
             System.out.println(this.passengerlist.get(current_idx)); 
         }
-    }
-    else
-    {
+    }else {
         System.out.println("This car is Empty");
     }
     
+}
+
+public String toString()
+{
+    return "Car with Capacity: "+ capacity; 
 }
 
 public static void main(String[] args) 
@@ -103,5 +105,8 @@ public static void main(String[] args)
     System.out.println(testingCar.addPassenger(Katie)); 
     System.out.println(testingCar.passengerlist);
     testingCar.printManifest(); 
+    System.out.println(testingCar.removePassenger(Kylie)); 
+    testingCar.printManifest();
+    System.out.println(testingCar.removePassenger(Katie));
 }
 }
