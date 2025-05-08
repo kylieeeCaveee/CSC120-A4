@@ -34,7 +34,7 @@ public int seatsRemaining(){
 
 /**
  * This function adds a passenger to the car if there is space and returns true. Otherwise, it returns false.
- * @param P the passenger to be added to the car
+ * @param p the passenger to be added to the car
  * @return T/F if the passenger has been added to the car or not
  */
 public Boolean addPassenger (Passenger p){
@@ -49,12 +49,11 @@ public Boolean addPassenger (Passenger p){
 
 /**
  * This function checks to see if a passenger is in the car, and if they are removes them, and returns true. Otherwise, it returns false.
- * @param P the passenger to be removed
+ * @param p the passenger to be removed
  * @return T/F if the passenger has been removed or not
  */
 public Boolean removePassenger(Passenger p){
-    if (this.passengerList.contains(p)==true)
-    {
+    if (this.passengerList.contains(p)==true){
         this.passengerList.remove(p); 
         return true; 
     }else{

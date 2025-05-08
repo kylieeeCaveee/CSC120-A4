@@ -63,7 +63,7 @@ public class Engine implements EngineRequirements{
         if (currentFuelLevel>0){
             this.currentFuelLevel= this.currentFuelLevel-5; 
         System.out.println("Current Fuel Level: "+ this.currentFuelLevel);
-        } else {
+        }else{
             System.out.println("Fuel level is too low to run.");
         } 
         return currentFuelLevel>0; 
@@ -79,8 +79,7 @@ public class Engine implements EngineRequirements{
         System.out.println(myOtherEngine); 
         myOtherEngine.refuel(); 
         Engine trialEngine = new Engine(FuelType.ELECTRIC, 100.0, 100.0);
-        while (trialEngine.go()) 
-        {
+        while (trialEngine.go()){
             System.out.println("Choo choo!");
         }
         System.out.println("Out of fuel.");
